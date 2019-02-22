@@ -6,15 +6,18 @@ AHTSE is a collection of Apache httpd modules that can be used independently or 
 **AHTSE Components**
 
 * *Data Sources*
-  * [mod_mrf](https://github.com/lucianpls/mod_mrf)
+  * [mrf](https://github.com/lucianpls/mod_mrf)
+  * [fractal_tiles](https://github.com/lucianpls/mod_fractal_tiles)
 
 * *Processing*
-  * [mod_reproject](https://github.com/lucianpls/mod_reproject)
-  * [mod_convert](https://github.com/lucianpls/mod_convert)
+  * [reproject](https://github.com/lucianpls/mod_reproject)
+  * [convert](https://github.com/lucianpls/mod_convert)
+  * [fill](https://github.com/lucianpls/mod_ahtse_fill)
 
 * *Protocol modules*
-  * [mod_twms](https://github.com/lucianpls/mod_twms)
+  * [twms](https://github.com/lucianpls/mod_twms)
 
 * *Utilities*
-  * [mod_receive](https://github.com/lucianpls/mod_receive)
-  * [mod_sfim](https://github.com/lucianpls/mod_sfim)  
+  * [receive](https://github.com/lucianpls/mod_receive)
+  * [sfim](https://github.com/lucianpls/mod_sfim)
+  * [lua](https://github.com/lucianpls/mod_ahtse_lua)
