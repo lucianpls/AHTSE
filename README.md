@@ -14,7 +14,7 @@ AHTSE is a collection of Apache httpd modules that can be used independently or 
   * [convert](https://github.com/lucianpls/mod_convert)
   * [fill](https://github.com/lucianpls/mod_ahtse_fill)
 
-* *Protocol modules*
+* *Protocol conversion*
   * [twms](https://github.com/lucianpls/mod_twms)
 
 * *Utilities*
