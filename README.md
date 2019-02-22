@@ -7,7 +7,7 @@ AHTSE is a collection of Apache httpd modules that can be used independently or 
 
 * *Data Sources*
   * [mrf](https://github.com/lucianpls/mod_mrf)
-  * [fractal_tiles](https://github.com/lucianpls/mod_fractal_tiles)
+  * [fractal](https://github.com/lucianpls/mod_fractal_tiles)
 
 * *Processing*
   * [reproject](https://github.com/lucianpls/mod_reproject)
