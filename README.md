@@ -19,5 +19,5 @@ AHTSE is a collection of Apache httpd modules that can be used independently or 
 
 * *Utilities*
   * [receive](https://github.com/lucianpls/mod_receive)
-  * [sfim](https://github.com/lucianpls/mod_sfim)
+  * [send file](https://github.com/lucianpls/mod_sfim)
   * [lua](https://github.com/lucianpls/mod_ahtse_lua)
