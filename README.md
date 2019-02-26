@@ -15,7 +15,7 @@ The AHTSE common feature that provides interoperability is the tile request.  Th
 
 * *Transformation*
   * [reproject](https://github.com/lucianpls/mod_reproject)
-    * Projection changes, tile grid and scale changes and also format changes
+    * Projection changes, tile grid and scale changes and tile format changes
   * [convert](https://github.com/lucianpls/mod_convert)
     * Format, data type conversions
   * [fill](https://github.com/lucianpls/mod_ahtse_fill)
