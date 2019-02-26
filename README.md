@@ -24,12 +24,12 @@ The AHTSE common feature that provides interoperability is the tile request.  Th
 
 * *Protocol conversion*
   * [twms](https://github.com/lucianpls/mod_twms)
-    * Converts requests from tWMS protocol to AHTSE standard
+    * Converts requests from tWMS protocol to AHTSE style
 
 * *Utilities*
   * [receive](https://github.com/lucianpls/mod_receive)
     * Subrequest filter that enables passing data between AHTSE components
   * [send file](https://github.com/lucianpls/mod_sfim)
-    * Used for protocol files, it sends a static file as the response for requests matching URL patterns
+    * Used for protocol files, it responds with a static file to pattern matching requests
   * [lua](https://github.com/lucianpls/mod_ahtse_lua)
     * Allows AHTSE modules to be extended with Lua scripts
