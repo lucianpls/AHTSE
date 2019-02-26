@@ -6,7 +6,7 @@ The AHTSE common feature that provides interoperability is the tile request.  Th
 
 **AHTSE Components**
 
-* *Data Sources*
+* *Source*
   * [mrf](https://github.com/lucianpls/mod_mrf)
     * Serves tiles from an MRF file
   * [fractal](https://github.com/lucianpls/mod_fractal_tiles)
