@@ -30,6 +30,6 @@ The AHTSE common feature that provides interoperability is the tile request.  Th
   * [receive](https://github.com/lucianpls/mod_receive)
     * Subrequest filter that enables passing data between AHTSE components
   * [send file](https://github.com/lucianpls/mod_sfim)
-    * Used for protocol files, it sends a static file as the response for requests matching one or more URL patterns
+    * Used for protocol files, it sends a static file as the response for requests matching URL patterns
   * [lua](https://github.com/lucianpls/mod_ahtse_lua)
     * Allows AHTSE modules to be extended with Lua scripts
