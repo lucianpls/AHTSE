@@ -6,7 +6,13 @@ The AHTSE common feature that provides interoperability is the tile request.  Th
 
 **AHTSE Components**
 
-* *Source*
+* *Common*
+  * [libahtse](https://github.com/lucianpls/libahtse)
+    * common code, shared by other ahtse components
+    * JPEG, JPEG12 and PNG encoding and deconding
+    * AHTSE configuration file parsing
+    
+* *Sources*
   * [mrf](https://github.com/lucianpls/mod_mrf)
     * Serves tiles from an MRF file
   * [fractal](https://github.com/lucianpls/mod_fractal_tiles)
