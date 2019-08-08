@@ -16,7 +16,8 @@ The AHTSE common feature that provides interoperability is the tile request.  Th
   * [mrf](https://github.com/lucianpls/mod_mrf)
     * Serves tiles from an MRF file
   * [ecache](https://github.com/lucianpls/mod_ecache)
-    * Serves tiles from an esri cache (V2)
+    * Serves tiles from an esri bundle cache (V2)
+    * Can cache other tile services in an esri bundle cache format
   * [fractal](https://github.com/lucianpls/mod_fractal_tiles)
     * **INCOMPLETE**
     * Generates tiles of a fractal
@@ -30,7 +31,6 @@ The AHTSE common feature that provides interoperability is the tile request.  Th
     * **INCOMPLETE**
     * Fill in missing tiles by oversampling lower resolution levels
   * [ahtse_png](https://github.com/lucianpls/mod_ahtse_png)
-    * **INCOMPLETE**
     * A PNG header manipulation module
 
 * *Protocol conversion*
