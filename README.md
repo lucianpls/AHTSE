@@ -12,7 +12,7 @@ The AHTSE common feature that provides interoperability is the tile request form
     * JPEG, JPEG12 and PNG encoding and deconding
     * AHTSE configuration file parsing
     
-* *Sources*
+* *Tile Source*
   * [mrf](https://github.com/lucianpls/mod_mrf)
     * Serves tiles from an MRF file
   * [ecache](https://github.com/lucianpls/mod_ecache)
@@ -22,7 +22,7 @@ The AHTSE common feature that provides interoperability is the tile request form
     * **INCOMPLETE**
     * Generates tiles of a fractal
 
-* *Transformation*
+* *Tile Transformation*
   * [reproject](https://github.com/lucianpls/mod_reproject)
     * Projection changes, tile grid and scale changes and tile format changes
   * [convert](https://github.com/lucianpls/mod_convert)
@@ -33,7 +33,7 @@ The AHTSE common feature that provides interoperability is the tile request form
   * [ahtse_png](https://github.com/lucianpls/mod_ahtse_png)
     * A PNG header manipulation module
 
-* *Protocol conversion*
+* *Input protocol conversion*
   * [twms](https://github.com/lucianpls/mod_twms)
     * Converts requests from tWMS protocol to AHTSE style
 
@@ -41,6 +41,6 @@ The AHTSE common feature that provides interoperability is the tile request form
   * [receive](https://github.com/lucianpls/mod_receive)
     * Subrequest filter that enables passing data between AHTSE components
   * [send file](https://github.com/lucianpls/mod_sfim)
-    * Used for protocol files, it responds with a static file to pattern matching requests
+    * Used for protocol handshake files, it responds with the content from a static file to requests matching specific patterns
   * [lua](https://github.com/lucianpls/mod_ahtse_lua)
     * Allows AHTSE modules to be extended with Lua scripts
