@@ -6,13 +6,7 @@ The AHTSE common feature that provides interoperability is the tile request form
 
 **AHTSE Components**
 
-* *Common*
-  * [libahtse](https://github.com/lucianpls/libahtse)
-    * common code, shared by other ahtse components
-    * JPEG, JPEG12 and PNG encoding and deconding
-    * AHTSE configuration file parsing
-    
-* *Tile Source*
+* *Tile Sources*
   * [mrf](https://github.com/lucianpls/mod_mrf)
     * Serves tiles from an MRF file
   * [ecache](https://github.com/lucianpls/mod_ecache)
@@ -36,6 +30,12 @@ The AHTSE common feature that provides interoperability is the tile request form
   * [twms](https://github.com/lucianpls/mod_twms)
     * Converts requests from tWMS protocol to AHTSE style
 
+* *Common dependency*
+  * [libahtse](https://github.com/lucianpls/libahtse)
+    * common code, shared by other ahtse components
+    * JPEG, JPEG12 and PNG encoding and deconding
+    * AHTSE configuration file parsing
+    
 * *Utilities*
   * [receive](https://github.com/lucianpls/mod_receive)
     * Subrequest filter that enables passing data between AHTSE components
