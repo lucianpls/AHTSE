@@ -28,8 +28,7 @@ The AHTSE common feature that provides interoperability is the tile request form
   * [convert](https://github.com/lucianpls/mod_convert)
     * Format, data type conversions
   * [fill](https://github.com/lucianpls/mod_ahtse_fill)
-    * **INCOMPLETE**
-    * Fill in missing tiles by oversampling lower resolution levels
+    * Fill in missing tiles by oversampling lower resolution levels. It can be used to fill in sparse datasets, or to add oversampled levels.
   * [ahtse_png](https://github.com/lucianpls/mod_ahtse_png)
     * A PNG header manipulation module
 
