@@ -19,8 +19,8 @@ of the served dataset. The _M_ parameter is the only optional one, it defaults t
 ||**[convert](https://github.com/lucianpls/mod_convert)**|Data values type conversions|
 ||**[fill](https://github.com/lucianpls/mod_ahtse_fill)**|Fill in missing tiles by oversampling lower resolution levels. It can be used to fill in sparse datasets, or to add oversampled levels.|
 ||**[ahtse_png](https://github.com/lucianpls/mod_ahtse_png)**|PNG header manipulation module, without a full transcode|
-|*Protocol conversion*|**[twms](https://github.com/lucianpls/mod_twms)**|Converts requests from tWMS protocol to AHTSE style|
-|*Common dependency*|**[libahtse](https://github.com/lucianpls/libahtse)**|common code, shared by other ahtse components. Includes JPEG, JPEG12 and PNG encoding and deconding. Also provides AHTSE configuration file parsing and frequently used procedures.|
+|*Protocol*|**[twms](https://github.com/lucianpls/mod_twms)**|Converts requests from tWMS protocol to AHTSE style|
+|*Common*|**[libahtse](https://github.com/lucianpls/libahtse)**|common code, shared by other ahtse components. Includes JPEG, JPEG12 and PNG encoding and deconding. Also provides AHTSE configuration file parsing and frequently used procedures.|
 |*Utilities*|**[receive](https://github.com/lucianpls/mod_receive)**|Subrequest filter that enables passing data between AHTSE components|
 ||**[send file](https://github.com/lucianpls/mod_sfim)**|Used for protocol handshake files, it responds with the content from a static file to requests matching specific patterns|
 ||**[lua](https://github.com/lucianpls/mod_ahtse_lua)**|Allows AHTSE modules to be extended with Lua scripts|
