@@ -16,10 +16,10 @@ of the served dataset. The _M_ parameter is the only optional one, it defaults t
 |*Sources*|**[mrf](https://github.com/lucianpls/mod_mrf)**|Serves tiles from an MRF file|
 ||**[ecache](https://github.com/lucianpls/mod_ecache)**|Serves tiles from an esri bundle cache (V2), can cache other tile services|
 ||**[fractal](https://github.com/lucianpls/mod_fractal_tiles)**|**INCOMPLETE** Generates tiles of a fractal as a test source|
-|*Transformations*|**[reproject](https://github.com/lucianpls/mod_reproject)**|Projection, tile grid and scale, format change|
+|*Transformations*|**[retile](https://github.com/lucianpls/mod_retile)**|Projection, tile grid and scale, format change|
 ||**[convert](https://github.com/lucianpls/mod_convert)**|Data values and type conversions|
-||**[fill](https://github.com/lucianpls/mod_ahtse_fill)**|Fill in missing tiles by oversampling lower resolution levels. It can be used to fill in sparse datasets, or to add oversampled levels.|
-||**[ahtse_png](https://github.com/lucianpls/mod_ahtse_png)**|PNG manipulation module, without a full transcode|
+||**[fillin](https://github.com/lucianpls/mod_fillin)**|Fill in missing tiles by oversampling lower resolution levels. It can be used to fill in sparse datasets, or to add oversampled levels.|
+||**[pngmod](https://github.com/lucianpls/mod_pngmod)**|PNG manipulation module, without a full transcode|
 |*Protocol*|**[twms](https://github.com/lucianpls/mod_twms)**|Converts requests from tWMS protocol to AHTSE style|
 |*Utilities*|**[receive](https://github.com/lucianpls/mod_receive)**|Subrequest filter that enables passing tile data between AHTSE components|
 ||**[conditonal send file](https://github.com/lucianpls/mod_sfim)**|Used for protocol handshake files, it responds with the content from a static file to requests matching specific patterns|
