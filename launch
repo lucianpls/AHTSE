@@ -1,0 +1,31 @@
+
+COMMON_PARAMS=" --region us-west-2 --profile me"
+
+#
+# To get valid latest parameter names:
+# aws ssm get-parameters-by-path --path /aws/service/ami-amazon-linux-latest/ $COMMON_PARAMS
+# Useful ones are amzn2-ami-hvm-x86_64-ebs and amzn2-ami-hvm-arm64-gp2 (no ebs at this time?)
+# There are also ...-ami-minimal-... versions
+#
+
+if [ -n "$1" ]
+then
+  AMI="$1"
+else
+  AMI=$(aws ssm get-parameter --name "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-arm64-gp2" $COMMON_PARAMS | grep Value |cut -d\" -f 4)
+fi
+
+lspec() {
+cat <<END_LABEL
+{
+  "ImageId" : "${AMI}",
+  "KeyName" : "handler",
+  "SecurityGroupIds" : [ "sg-04a6cca6cd5193c64", "sg-e9ec3297" ],
+  "InstanceType" : "c6g.4xlarge",
+  "IamInstanceProfile" : { "Arn" : "arn:aws:iam::639125444419:instance-profile/Handler" }
+}
+END_LABEL
+}
+
+# echo $(lspec)
+aws ec2 $COMMON_PARAMS request-spot-instances --launch-specification "$(lspec)" 
