@@ -4,7 +4,7 @@
 
 # GIT ID
 export ME=lucianpls
-export THIS_PROJECT=AWSLinux_GDAL_AHTSE
+export THIS_PROJECT=AHTSE
 export GITHUB=https://github.com
 
 sudo yum install -q -y git
