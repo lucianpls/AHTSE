@@ -3,5 +3,6 @@
 # Some system libraries might still be needed, for example libzstd
 #
 
+cd
 rm -f bin/{cmake,ctest,cpack}
-tar -zcf ec2-home.tgz modules bin lib lib64 share/gdal share/proj
+tar -zcf ec2-home-$(uname -p).tgz modules bin lib lib64 share/gdal share/proj include
