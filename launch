@@ -1,31 +1,38 @@
 
-COMMON_PARAMS=" --region us-west-2 --profile me"
+AWS_COMARGS="--profile me --region us-west-2"
 
-#
-# To get valid latest parameter names:
-# aws ssm get-parameters-by-path --path /aws/service/ami-amazon-linux-latest/ $COMMON_PARAMS
-# Useful ones are amzn2-ami-hvm-x86_64-ebs and amzn2-ami-hvm-arm64-gp2 (no ebs at this time?)
-# There are also ...-ami-minimal-... versions
-#
+latest() {
+ aws $AWS_COMARGS ssm get-parameter --name /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-${1}-gp2 |grep Value|cut -d\" -f 4
+}
 
-if [ -n "$1" ]
+# defaults to arm64, any argument switches to x86_64
+arch=${1:-arm64}
+
+# The best priced zone changes often
+if [[ $arch == "arm64" ]]
 then
-  AMI="$1"
+  itype=c6g.4xlarge
+  zone=us-west-2c
 else
-  AMI=$(aws ssm get-parameter --name "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-arm64-gp2" $COMMON_PARAMS | grep Value |cut -d\" -f 4)
+  arch=x86_64
+  itype=c5ad.2xlarge
+  zone=us-west-2a
 fi
+
+AMI=$(latest $arch)
 
 lspec() {
 cat <<END_LABEL
 {
-  "ImageId" : "${AMI}",
+  "ImageId" : "$AMI",
   "KeyName" : "handler",
   "SecurityGroupIds" : [ "sg-04a6cca6cd5193c64", "sg-e9ec3297" ],
-  "InstanceType" : "c6g.4xlarge",
+  "InstanceType" : "$itype",
+  "Placement" : { "AvailabilityZone" : "$zone" },
   "IamInstanceProfile" : { "Arn" : "arn:aws:iam::639125444419:instance-profile/Handler" }
 }
 END_LABEL
 }
 
 # echo $(lspec)
-aws ec2 $COMMON_PARAMS request-spot-instances --launch-specification "$(lspec)" 
+aws ec2 $AWS_COMARGS request-spot-instances --launch-specification "$(lspec)" 
