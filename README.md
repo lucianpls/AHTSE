@@ -19,7 +19,7 @@ available at the end of the URL.
 
 |Type|Name|Function|
 |-|-|-|
-|*Common*|**[AHTSE](.)**|Top level AHTSE project, contains useful scripts to build AHTSE|
+|*Common*|**[AHTSE](../..)**|Top level AHTSE project, contains useful scripts to build AHTSE|
 ||**[libahtse](https://github.com/lucianpls/libahtse)**|common code, shared by AHTSE modules|
 ||**[libicd](https://github.com/lucianpls/libicd)**|Raster format codecs with uniform access API|
 |*Sources*|**[mrf](https://github.com/lucianpls/mod_mrf)**|Serves tiles from an MRF file|
