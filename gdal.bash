@@ -87,4 +87,14 @@ popd
 # From ~/src
 popd
 
-echo Remember to set PYTHONPATH and LD_LIBRARY_PATH
+# Set up environment for using gdal
+export PYTHONPATH=$(echo $PREFIX/lib64/python3.*/site-packages)
+export LD_LIBRARY_PATH=$PREFIX/lib
+grep -q PYTHONPATH $HOME/.bashrc
+if [ ! -z $? ]
+then
+    cat >>$HOME/.bashrc <<END_LABEL
+    export PYTHONPATH=$PYTHONPATH
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+    END_LABEL
+fi

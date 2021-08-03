@@ -1,3 +1,4 @@
+# Starts a spot instance in aws
 
 AWS_COMARGS="--profile me --region us-west-2"
 
@@ -28,8 +29,7 @@ cat <<END_LABEL
   "KeyName" : "handler",
   "SecurityGroupIds" : [ "sg-04a6cca6cd5193c64", "sg-e9ec3297" ],
   "InstanceType" : "$itype",
-  "Placement" : { "AvailabilityZone" : "$zone" },
-  "IamInstanceProfile" : { "Arn" : "arn:aws:iam::639125444419:instance-profile/Handler" }
+  "Placement" : { "AvailabilityZone" : "$zone" }
 }
 END_LABEL
 }
