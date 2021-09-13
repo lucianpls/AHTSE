@@ -66,7 +66,7 @@ ahtse_make mod_convert
 ahtse_make mod_ecache
 
 #Deploy
-sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrotli*.so /lib64
+sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrotli*.so $PREFIX/lib/libbrunsli*-c.so /lib64
 sudo cp $PREFIX/modules/*.so /etc/httpd/modules
 
 # Create it here, copy it to system folder
