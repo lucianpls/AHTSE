@@ -2,6 +2,20 @@
 
 AWS_COMARGS="--profile me --region us-west-2"
 
+# Change parameters in this function depending on the AWS account
+lspec() {
+cat <<END_LABEL
+{
+  "ImageId" : "$AMI",
+  "KeyName" : "handler",
+  "IamInstanceProfile" : { "Name" : "Handler" },
+  "SecurityGroupIds" : [ "sg-04a6cca6cd5193c64", "sg-e9ec3297" ],
+  "InstanceType" : "$itype",
+  "Placement" : { "AvailabilityZone" : "$zone" }
+}
+END_LABEL
+}
+
 latest() {
  aws $AWS_COMARGS ssm get-parameter --name /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-${1}-gp2 |grep Value|cut -d\" -f 4
 }
@@ -21,18 +35,5 @@ else
 fi
 
 AMI=$(latest $arch)
-
-lspec() {
-cat <<END_LABEL
-{
-  "ImageId" : "$AMI",
-  "KeyName" : "handler",
-  "SecurityGroupIds" : [ "sg-04a6cca6cd5193c64", "sg-e9ec3297" ],
-  "InstanceType" : "$itype",
-  "Placement" : { "AvailabilityZone" : "$zone" }
-}
-END_LABEL
-}
-
 # echo $(lspec)
 aws ec2 $AWS_COMARGS request-spot-instances --launch-specification "$(lspec)" 
