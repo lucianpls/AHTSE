@@ -32,5 +32,5 @@ available at the end of the URL.
 |*Protocol*|**[twms](https://github.com/lucianpls/mod_twms)**|Converts requests from tWMS protocol to AHTSE style|
 |*Utilities*|**[receive](https://github.com/lucianpls/mod_receive)**|Subrequest filter that enables passing tile data between AHTSE components|
 ||**[conditonal send file](https://github.com/lucianpls/mod_sfim)**|Used for protocol handshake files, it responds with the content from a static file to requests matching specific patterns|
-||**[brunsli](httpd://github.com/lucianpls/mod_brunsli)**|Filter to convert between JPEG JFIF and brunsli on the fly|
+||**[brunsli](https://github.com/lucianpls/mod_brunsli)**|Filter to convert between JPEG JFIF and brunsli on the fly|
 ||**[lua](https://github.com/lucianpls/mod_ahtse_lua)**|Allows AHTSE modules to be extended with Lua scripts|
