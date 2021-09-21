@@ -23,7 +23,7 @@ available at the end of the URL.
 ||**[libahtse](https://github.com/lucianpls/libahtse)**|common code, shared by AHTSE modules|
 ||**[libicd](https://github.com/lucianpls/libicd)**|Raster format codecs with uniform access API|
 |*Sources*|**[mrf](https://github.com/lucianpls/mod_mrf)**|Serves tiles from an MRF file|
-||**[ecache](https://github.com/lucianpls/mod_ecache)**|Serves tiles from an esri bundle cache (V2), can cache other tile services|
+||**[ecache](https://github.com/lucianpls/mod_ecache)**|Serves tiles from an esri bundle cache, also cache other tile services|
 ||**[fractal](https://github.com/lucianpls/mod_fractal_tiles)**|**INCOMPLETE** Generates tiles of a fractal as a test source|
 |*Transformations*|**[retile](https://github.com/lucianpls/mod_retile)**|Projection, tile grid and scale, format change|
 ||**[convert](https://github.com/lucianpls/mod_convert)**|Data values and type conversions|
@@ -32,4 +32,5 @@ available at the end of the URL.
 |*Protocol*|**[twms](https://github.com/lucianpls/mod_twms)**|Converts requests from tWMS protocol to AHTSE style|
 |*Utilities*|**[receive](https://github.com/lucianpls/mod_receive)**|Subrequest filter that enables passing tile data between AHTSE components|
 ||**[conditonal send file](https://github.com/lucianpls/mod_sfim)**|Used for protocol handshake files, it responds with the content from a static file to requests matching specific patterns|
+||[brunsli]|**[brunsli](httpd://github.com/lucianpls/mod_brunsli)**|Filter to convert between JPEG JFIF and brunsli on the fly|
 ||**[lua](https://github.com/lucianpls/mod_ahtse_lua)**|Allows AHTSE modules to be extended with Lua scripts|
