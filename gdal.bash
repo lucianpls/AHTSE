@@ -25,10 +25,11 @@ pushd $HOME/src
 
 # current master of sqlite3, needed by PROJ
 # sqlite3 is already installed, so make sure this is our installation
-(test -f $PREFIX/bin/sqlite3 && $PREFIX/bin/sqlite3 --version | grep -q "3.36") || (
+(test -f $PREFIX/bin/sqlite3 && $PREFIX/bin/sqlite3 --version | grep -q "3.37") || (
     refresh $GITHUB/sqlite/sqlite release
     pushd sqlite
-    ./configure --prefix=$PREFIX 
+    ./configure --prefix=$PREFIX
+    export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
     make_build
     popd
 )
