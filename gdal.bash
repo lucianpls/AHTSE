@@ -22,14 +22,14 @@ make_build() {
 # How many processors to use for compilation
 NP=${NP:-$(nproc)}
 pushd $HOME/src
+export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
 # current master of sqlite3, needed by PROJ
 # sqlite3 is already installed, so make sure this is our installation
 (test -f $PREFIX/bin/sqlite3 && $PREFIX/bin/sqlite3 --version | grep -q "3.37") || (
-    refresh $GITHUB/sqlite/sqlite release
+    refresh $GITHUB/sqlite/sqlite version-3.37.2
     pushd sqlite
     ./configure --prefix=$PREFIX
-    export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
     make_build
     popd
 )
