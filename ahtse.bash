@@ -7,6 +7,10 @@ refresh() {
     else
         (cd $project; git pull -q)
     fi
+    if [[ ! -z "$2" ]]
+    then
+        (cd $project; git checkout -q $2)
+    fi
 }
 
 ahtse_make() {
