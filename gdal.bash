@@ -62,10 +62,11 @@ popd
 # Finally, my gdal project
 (command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.4." ) || (
     refresh $GITHUB/$ME/gdal
-    pushd gdal/gdal
+    pushd gdal
     # git switch brunsli
     # Use internal jpeg to get 12 bit capability
     # Use external jpeg to get 8 bit turbo
+    [[ -e configure ]] || ./autogen.sh
     ./configure --prefix=$PREFIX --with-python=python3 --with-proj=$PREFIX --with-sqlite3=$PREFIX --with-jpeg=internal --with-brunsli
     make_build
     popd
