@@ -1,4 +1,7 @@
 # Build the gdal cgi image subseter
+export ME=lucianpls
+export THIS_PROJECT=AHTSE
+export GITHUB=https://github.com
 
 refresh() {
     project=$(basename $1)
@@ -28,7 +31,7 @@ NP=${NP:-$(nproc)}
 pushd $HOME/src
 export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
-sudo yum install -q -y mod_fcgid
+sudo yum install -q -y mod_fcgid lua-devel
 
 # CGICC
 VER=3.2.19
