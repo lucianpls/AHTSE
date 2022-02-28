@@ -2,6 +2,7 @@
 export ME=lucianpls
 export THIS_PROJECT=AHTSE
 export GITHUB=https://github.com
+export PREFIX=$HOME
 
 refresh() {
     project=$(basename $1)
@@ -44,7 +45,7 @@ wget -qO - http://github.com/FastCGI-Archives/fcgi2/archive/refs/tags/$VER.tar.g
 make_build fcgi2-$VER
 
 # Ready for gigi itself
-refresh $GIHUB/$ME/gigi
+refresh $GITHUB/$ME/gigi
 # See gigi source for what make install does
 make_build gigi
 
