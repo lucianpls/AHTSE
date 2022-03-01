@@ -1,8 +1,8 @@
 # Build the gdal cgi image subseter
-export ME=lucianpls
+export ME=${ME:-lucianpls}
 export THIS_PROJECT=AHTSE
-export GITHUB=https://github.com
-export PREFIX=$HOME
+export GITHUB=${GITHUB:-https://github.com}
+export PREFIX=${PREFIX:-$HOME}
 
 refresh() {
     project=$(basename $1)
