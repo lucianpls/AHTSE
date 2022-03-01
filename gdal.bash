@@ -53,8 +53,6 @@ cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -S . -B 
 pushd out
 make -s -j $NP
 $SUDO make -s install
-# install the third party library dependencies
-$SUDO mv third_party/brotli/libbrotli*so* $PREFIX/lib
 popd
 rm -rf out
 popd
