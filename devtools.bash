@@ -5,7 +5,9 @@ sudo yum install -q -y python3 dstat zstd
 sudo yum install -q -y gcc gcc-c++ automake libtool
 
 # various depenencies
-sudo yum install -q -y tcl zlib-devel libcurl-devel libpng-devel libjpeg-devel python3-devel openssl-devel httpd-devel libzstd-devel
+sudo yum install -q -y tcl zlib-devel libcurl-devel\
+    libpng-devel libjpeg-devel libwebp-devel python3-devel openssl-devel\
+    httpd-devel libzstd-devel
 
 pip3 -q install boto3 pytest numpy
 
