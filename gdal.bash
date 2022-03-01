@@ -95,8 +95,8 @@ export LD_LIBRARY_PATH=$PREFIX/lib
 grep -q PYTHONPATH $HOME/.bashrc
 if [ ! -z $? ]
 then
-    cat >>$HOME/.bashrc <<END_LABEL
-    export PYTHONPATH=$PYTHONPATH
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-    END_LABEL
+cat >>$HOME/.bashrc <<END_LABEL
+export PYTHONPATH=$PYTHONPATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+END_LABEL
 fi
