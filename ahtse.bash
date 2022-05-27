@@ -73,8 +73,7 @@ ahtse_make mod_ecache
 sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /lib64
 sudo cp $PREFIX/modules/*.so /etc/httpd/modules
 
-# Create it here, copy it to system folder
-cat >ahtse.conf <<END_LABEL
+sudo cat >/etc/httpd/conf.modules.d/ahtse.conf <<END_LABEL
 # AHTSE modules
 
 # These are independent
@@ -111,8 +110,6 @@ LoadModule pngmod_module modules/mod_pngmod.so
 # Tile data conversions
 LoadModule convert_module modules/mod_convert.so
 END_LABEL
-
-sudo cp ahtse.conf /etc/httpd/conf.modules.d/
 
 # Test that everything loads
 httpd -t

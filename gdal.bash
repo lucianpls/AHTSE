@@ -57,6 +57,17 @@ popd
 rm -rf out
 popd
 
+# My own QB3, build only the library since libicd is not available yet
+refresh $GIHUB/$ME/QB3
+BDIR=QB3/QB3lib/out
+mkdir $BDIR
+pushd $BDIR
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -S ..
+make -s -j $NP
+$SUDO make -s install
+popd
+rm -rf BDIR
+
 # Finally, my gdal project
 (command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.4." ) || (
     refresh $GITHUB/$ME/gdal
