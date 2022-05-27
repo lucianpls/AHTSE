@@ -69,12 +69,23 @@ popd
 rm -rf BDIR
 
 # Finally, my gdal project
+# (command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.4." ) || (
+#     refresh $GITHUB/$ME/gdal
+#     pushd gdal
+#     # git switch brunsli
+#     [[ -e configure ]] || ./autogen.sh
+#     ./configure --prefix=$PREFIX --with-python=python3 --with-proj=$PREFIX --with-sqlite3=$PREFIX --with-brunsli
+#     make_build
+#     popd
+# )
+
+# Switch to cmake build
 (command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.4." ) || (
     refresh $GITHUB/$ME/gdal
-    pushd gdal
-    # git switch brunsli
-    [[ -e configure ]] || ./autogen.sh
-    ./configure --prefix=$PREFIX --with-python=python3 --with-proj=$PREFIX --with-sqlite3=$PREFIX --with-brunsli
+    git switch MRFQB3
+    mkdir gdal/build
+    pushd gdal/build
+    cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -S ..
     make_build
     popd
 )
