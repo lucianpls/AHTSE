@@ -58,7 +58,7 @@ rm -rf out
 popd
 
 # My own QB3, build only the library since libicd is not available yet
-refresh $GIHUB/$ME/QB3
+refresh $GITHUB/$ME/QB3
 BDIR=QB3/QB3lib/out
 mkdir $BDIR
 pushd $BDIR
