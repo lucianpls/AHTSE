@@ -73,10 +73,8 @@ rm -rf BDIR
     refresh $GITHUB/$ME/gdal
     pushd gdal
     # git switch brunsli
-    # Use internal jpeg to get 12 bit capability
-    # Use external jpeg to get 8 bit turbo
     [[ -e configure ]] || ./autogen.sh
-    ./configure --prefix=$PREFIX --with-python=python3 --with-proj=$PREFIX --with-sqlite3=$PREFIX --with-jpeg=internal --with-brunsli
+    ./configure --prefix=$PREFIX --with-python=python3 --with-proj=$PREFIX --with-sqlite3=$PREFIX --with-brunsli
     make_build
     popd
 )
