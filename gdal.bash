@@ -82,11 +82,13 @@ rm -rf BDIR
 # Switch to cmake build
 (command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.4." ) || (
     refresh $GITHUB/$ME/gdal
+    pushd gdal
     git switch MRFQB3
-    mkdir gdal/build
-    pushd gdal/build
+    mkdir build
+    pushd build
     cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -S ..
     make_build
+    popd
     popd
 )
 
