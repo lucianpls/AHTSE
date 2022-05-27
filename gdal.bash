@@ -84,7 +84,7 @@ rm -rf BDIR
 # mrf specific tools, ie 
 refresh $GITHUB/nasa-gibs/mrf
 pushd mrf/mrf_apps
-cp $PREFIX/src/gdal/gdal/frmts/mrf/marfa.h $PREFIX/include
+cp `find $PREFIX/src/gdal -name marfa.h` $PREFIX/include
 cat >Makefile.lcl <<END_LABEL
 PREFIX=$PREFIX
 GDAL_ROOT=$PREFIX/src/gdal/gdal
