@@ -74,7 +74,7 @@ rm -rf BDIR
     pushd gdal
     # git switch brunsli
     [[ -e configure ]] || ./autogen.sh
-    ./configure --prefix=$PREFIX --with-python --with-proj=$PREFIX --with-sqlite3=$PREFIX --with-brunsli
+    ./configure --prefix=$PREFIX --with-python=python3 --with-proj=$PREFIX --with-sqlite3=$PREFIX --with-brunsli
     make_build
     popd
 )
