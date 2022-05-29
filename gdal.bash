@@ -68,27 +68,18 @@ $SUDO make -s install
 popd
 rm -rf BDIR
 
-# Finally, my gdal project
-# (command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.4." ) || (
-#     refresh $GITHUB/$ME/gdal
-#     pushd gdal
-#     # git switch brunsli
-#     [[ -e configure ]] || ./autogen.sh
-#     ./configure --prefix=$PREFIX --with-python=python3 --with-proj=$PREFIX --with-sqlite3=$PREFIX --with-brunsli
-#     make_build
-#     popd
-# )
-
-# Switch to cmake build
-(command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.4." ) || (
+# My gdal, cmake build
+(command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.6." ) || (
     refresh $GITHUB/$ME/gdal
     pushd gdal
     git switch MRFQB3
     mkdir build
     pushd build
-    cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -S ..
+    cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib \
+        -DCMAKE_BUILD_TYPE=Release -S ..
     make_build
     popd
+    rm -rf build
     popd
 )
 

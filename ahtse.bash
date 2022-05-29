@@ -27,17 +27,15 @@ ahtse_make() {
 NP=${NP:-$(nproc)}
 pushd $HOME/src
 
-# libicd is not yet part of AHTSE
+# libicd is not part of AHTSE, build with cmake
 refresh $GITHUB/$ME/libicd
-pushd libicd/src
-cat <<LABEL >Makefile.lcl
-CP = cp
-PREFIX = $PREFIX
-LABEL
-make -j $NP 
-$SUDO make install
-make clean
+mkdir libicd/build
+pushd libicd/build
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib ..
+make -s -j $NP
+$SUDO make -s install
 popd
+rm -rf libicd/build
 
 export MAKEOPT=$HOME/src/Make.opt
 
@@ -69,7 +67,7 @@ ahtse_make mod_pngmod
 ahtse_make mod_convert
 ahtse_make mod_ecache
 
-#Deploy
+#Deploy, this may prevent rebuilding gdal
 sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /lib64
 sudo cp $PREFIX/modules/*.so /etc/httpd/modules
 
