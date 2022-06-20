@@ -1,23 +1,44 @@
 # Starts a spot instance in aws
-
-AWS_COMARGS="--profile me --region us-west-2"
-
-# Change parameters in this function depending on the AWS account
-lspec() {
-cat <<END_LABEL
-{
-  "ImageId" : "$AMI",
-  "KeyName" : "handler",
-  "IamInstanceProfile" : { "Name" : "Handler" },
-  "SecurityGroupIds" : [ "sg-04a6cca6cd5193c64", "sg-e9ec3297" ],
-  "InstanceType" : "$itype",
-  "Placement" : { "AvailabilityZone" : "$zone" }
-}
-END_LABEL
-}
+export AWS_REGION=us-west-2
+ZONE=${ZONE:-a}
+export AWS_PROFILE=me
+NAME=AHTSE-DEV
 
 latest() {
- aws $AWS_COMARGS ssm get-parameter --name /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-${1}-gp2 |grep Value|cut -d\" -f 4
+ aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-${1}-gp2 |grep Value|cut -d\" -f 4
+}
+
+#Get ids for running instances with a given name
+get_instid() {
+    instid=`aws ec2 describe-instances\
+	--filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running\
+	| jq -r .Reservations[].Instances[].InstanceId`
+    [ -z "${instid}" ] && return 1
+    echo $instid
+}
+
+get_inst_state() {
+    state=`aws ec2 describe-instances --filters Name=instance-id,Values=${1} | jq -r .Reservations[].Instances[].State.Name`
+    [ -z "$state" ] && return 1
+    echo $state
+}
+
+# Two params, instance id and state as string
+wait_for_instance_state() {
+    echo -n Waiting for instance $1 to be $2 >&2
+    while [ "$2" != "$(get_inst_state \"$1\")" ]
+    do
+        echo -n . >&2
+        sleep 1
+    done
+    echo \! >&2
+}
+
+#Get instance public IP
+get_inst_ip() {
+    state=`aws ec2 describe-instances --filters Name=instance-id,Values=${1} | jq -r .Reservations[].Instances[].NetworkInterfaces[].Association.PublicIp`
+    [ -z ${state} ] && return 1
+    echo $state
 }
 
 # defaults to arm64, any argument switches to x86_64
@@ -26,14 +47,41 @@ arch=${1:-arm64}
 # The best priced zone changes often
 if [[ $arch == "arm64" ]]
 then
-  itype=c6g.4xlarge
-  zone=us-west-2c
+  itype=c6gd.4xlarge
 else
   arch=x86_64
   itype=c5ad.2xlarge
-  zone=us-west-2a
 fi
 
 AMI=$(latest $arch)
 # echo $(lspec)
-aws ec2 $AWS_COMARGS request-spot-instances --launch-specification "$(lspec)" 
+# aws ec2 request-spot-instances --launch-specification "$(lspec)" 
+
+hostinfo=`aws ec2 run-instances\
+	--image-id $AMI\
+	--instance-type $itype\
+	--placement AvailabilityZone=$AWS_REGION$ZONE\
+	--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$NAME}]"\
+	--instance-market-options "MarketType=spot"\
+	--key-name handler\
+	--security-group-ids sg-e9ec3297 sg-02f1196e4bd51ad14\
+`
+
+hostid=`echo $hostinfo | jq -r .Instances[].InstanceId`
+[ -z "$hostid" ] && {
+    echo Failed to start instance >&2
+    exit 1
+}
+
+echo Start instance $hostid
+wait_for_instance_state $hostid "running"
+
+hostip=$(get_inst_ip $hostid)
+[ -z "$hostip" ] && {
+    echo Failed to get public IP for instance $hostid
+    exit 1
+}
+
+echo Host IP is $hostip
+scp bootstrap.bash $hostip:
+ssh $hostip boostrap.bash
