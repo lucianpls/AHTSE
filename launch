@@ -83,5 +83,5 @@ hostip=$(get_inst_ip $hostid)
 }
 
 echo Host IP is $hostip
-scp bootstrap.bash $hostip:
-ssh $hostip boostrap.bash
+scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no bootstrap.bash $hostip:
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $hostip bash -x ./bootstrap.bash
