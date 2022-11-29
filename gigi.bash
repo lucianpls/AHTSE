@@ -20,7 +20,7 @@ refresh() {
 
 make_build() {
     pushd $1
-    [[ -e ./configure ]] || ./autogen.sh
+    [[ -e ./configure ]] || [[ -e ./autogen.sh ]] && ./autogen.sh
     [[ -e ./configure ]] && ./configure --prefix=$PREFIX
     make -j $NP 
     $SUDO make install
