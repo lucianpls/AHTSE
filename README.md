@@ -34,3 +34,7 @@ available at the end of the URL.
 ||**[conditonal send file](https://github.com/lucianpls/mod_sfim)**|Used for protocol handshake files, it responds with the content from a static file to requests matching specific patterns|
 ||**[brunsli](https://github.com/lucianpls/mod_brunsli)**|Filter to convert between JPEG JFIF and brunsli on the fly|
 ||**[lua](https://github.com/lucianpls/mod_ahtse_lua)**|Allows AHTSE modules to be extended with Lua scripts|
+
+## Getting Started
+
+This repository contains a few bash scripts that can be used to build most of the AHTSE components on an Amazon Linux instance. [bootstrap.bash](bootstrap.bash) is the main build script

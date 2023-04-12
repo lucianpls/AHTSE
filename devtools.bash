@@ -1,5 +1,5 @@
 # generic stuff
-sudo yum install -q -y python3 dstat zstd
+sudo yum install -q -y python3 zstd
 
 # development tools
 sudo yum install -q -y gcc gcc-c++ automake libtool

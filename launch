@@ -9,7 +9,7 @@ NAME=AHTSE-DEV
 
 # Takes one argument, the short name
 latest() {
-    aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/${1} --output text --query Parameter.Value
+    aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/${1} --output text --query Parameter.Value |tr -d '\r'
 }
 
 # Takes one argument, the short name of the architecture
@@ -68,7 +68,8 @@ else
   itype=c5ad.2xlarge
 fi
 
-AMI=$(latest_al2 $arch)
+AMI=$(latest_al2023 $arch)
+
 # echo $(lspec)
 # aws ec2 request-spot-instances --launch-specification "$(lspec)" 
 
