@@ -4,8 +4,23 @@ ZONE=${ZONE:-a}
 export AWS_PROFILE=me
 NAME=AHTSE-DEV
 
+# List the latest Linux AMI in a region
+# aws ssm --profile me --region us-west-2 get-parameters-by-path --path /aws/service/ami-amazon-linux-latest --query Parameters[].Name
+
+# Takes one argument, the short name
 latest() {
- aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-${1}-gp2 |grep Value|cut -d\" -f 4
+    aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/${1} --output text --query Parameter.Value
+}
+
+# Takes one argument, the short name of the architecture
+latest_al2() {
+    latest amzn2-ami-hvm-${1}-gp2
+}
+
+# Same as above, but for AL2023
+latest_al2023() {
+    latest al2023-ami-kernel-default-${1}
+#    latest al2023-ami-minimal-kernel-default-${1}
 }
 
 #Get ids for running instances with a given name
@@ -53,7 +68,7 @@ else
   itype=c5ad.2xlarge
 fi
 
-AMI=$(latest $arch)
+AMI=$(latest_al2 $arch)
 # echo $(lspec)
 # aws ec2 request-spot-instances --launch-specification "$(lspec)" 
 
