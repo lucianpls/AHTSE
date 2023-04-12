@@ -1,5 +1,16 @@
 # generic stuff
-sudo yum install -q -y python3 zstd httpd mod_ssl
+sudo yum install -q -y python3 zstd httpd openssl mod_ssl
+
+# Might need to self-certify
+
+if [ ! -e /etc/pki/tls/certs/localhost.crt ]
+then
+    sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+        -keyout /etc/pki/tls/private/localhost.key \
+        -out /etc/pki/tls/certs/localhost.crt \
+        -subj "/C=US/ST=Oregon/L=Los Angeles/O=AHTSE/OU=Org/CN=www.ahtse.com"
+fi
+
 # One of these might fail
 sudo yum install -q -y pip
 sudo yum install -q -y pip3
