@@ -1,5 +1,8 @@
 # generic stuff
-sudo yum install -q -y python3 zstd
+sudo yum install -q -y python3 zstd httpd mod_ssl
+# One of these might fail
+sudo yum install -q -y pip
+sudo yum install -q -y pip3
 
 # development tools
 sudo yum install -q -y gcc gcc-c++ automake libtool
@@ -7,7 +10,7 @@ sudo yum install -q -y gcc gcc-c++ automake libtool
 # various depenencies
 sudo yum install -q -y tcl zlib-devel libcurl-devel\
     libpng-devel libjpeg-devel libwebp-devel python3-devel openssl-devel\
-    httpd-devel libzstd-devel openjpeg2-devel
+    httpd-devel libzstd-devel openjpeg2-devel libwebp-devel
 
 pip3 -q install boto3 pytest numpy
 
