@@ -26,7 +26,7 @@ refresh() {
 
 # Set PREFIX to /usr/local for system install
 export PREFIX=${PREFIX:-$HOME}
-mkdir $HOME/src
+[ -d $HOME/src/ ] || mkdir $HOME/src
 
 # $SUDO to be used for install commands
 if [[ $PREFIX =~ ^/usr ]]

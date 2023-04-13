@@ -9,7 +9,8 @@ NAME=AHTSE-DEV
 
 # Takes one argument, the short name
 latest() {
-    aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/${1} --output text --query Parameter.Value |tr -d '\r'
+    aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/${1} --output text\
+    --query Parameter.Value |tr -d '\r'
 }
 
 # Takes one argument, the short name of the architecture
@@ -26,14 +27,18 @@ latest_al2023() {
 #Get ids for running instances with a given name
 get_instid() {
     instid=`aws ec2 describe-instances\
-	--filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running\
-	| jq -r .Reservations[].Instances[].InstanceId`
+	    --filters Name=tag:Name,Values=${1} Name=instance-state-name,Values=running\
+	    | jq -r .Reservations[].Instances[].InstanceId`
     [ -z "${instid}" ] && return 1
     echo $instid
 }
 
 get_inst_state() {
-    state=`aws ec2 describe-instances --filters Name=instance-id,Values=${1} | jq -r .Reservations[].Instances[].State.Name`
+    state=`aws ec2 describe-instances --filters Name=instance-id,Values=${1}\
+        --query Reservations[].Instances[].State.Name\
+        --output text\
+        |tr -d '\r'\
+    `
     [ -z "$state" ] && return 1
     echo $state
 }
@@ -41,7 +46,7 @@ get_inst_state() {
 # Two params, instance id and state as string
 wait_for_instance_state() {
     echo -n Waiting for instance $1 to be $2 >&2
-    while [ "$2" != "$(get_inst_state \"$1\")" ]
+    while [ $2 != `get_inst_state $1` ]
     do
         echo -n . >&2
         sleep 1
@@ -51,7 +56,11 @@ wait_for_instance_state() {
 
 #Get instance public IP
 get_inst_ip() {
-    state=`aws ec2 describe-instances --filters Name=instance-id,Values=${1} | jq -r .Reservations[].Instances[].NetworkInterfaces[].Association.PublicIp`
+    state=`aws ec2 describe-instances --filters Name=instance-id,Values=${1}\
+        --query Reservations[].Instances[].NetworkInterfaces[].Association.PublicIp\
+        --output text\
+        |tr -d '\r'\
+    `
     [ -z ${state} ] && return 1
     echo $state
 }
@@ -73,7 +82,7 @@ AMI=$(latest_al2023 $arch)
 # echo $(lspec)
 # aws ec2 request-spot-instances --launch-specification "$(lspec)" 
 
-hostinfo=`aws ec2 run-instances\
+hostid=`aws ec2 run-instances\
 	--image-id $AMI\
 	--instance-type $itype\
 	--placement AvailabilityZone=$AWS_REGION$ZONE\
@@ -81,16 +90,18 @@ hostinfo=`aws ec2 run-instances\
 	--instance-market-options "MarketType=spot"\
 	--key-name handler\
 	--security-group-ids sg-e9ec3297 sg-02f1196e4bd51ad14\
+    --output text\
+    --query Instances[*].InstanceId\
+    |tr -d '\r'\
 `
 
-hostid=`echo $hostinfo | jq -r .Instances[].InstanceId`
 [ -z "$hostid" ] && {
     echo Failed to start instance >&2
     exit 1
 }
 
 echo Start instance $hostid
-wait_for_instance_state $hostid "running"
+wait_for_instance_state $hostid running
 
 hostip=$(get_inst_ip $hostid)
 [ -z "$hostip" ] && {
