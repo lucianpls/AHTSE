@@ -40,9 +40,14 @@ wget -qO - http://ftp.gnu.org/gnu/cgicc/cgicc-$VER.tar.gz |tar -zxf -
 make_build cgicc-$VER
 
 # fcgi SDK, known release
-VER=2.4.2
-wget -qO - http://github.com/FastCGI-Archives/fcgi2/archive/refs/tags/$VER.tar.gz |tar -zxf -
-make_build fcgi2-$VER
+# VER=2.4.2
+# wget -qO - http://github.com/FastCGI-Archives/fcgi2/archive/refs/tags/$VER.tar.gz |tar -zxf -
+# make_build fcgi2-$VER
+
+# fcgi SDK, latest
+mkdir -p fcgi2
+wget -S https://github.com/FastCGI-Archives/fcgi2/tarball/master -O - |tar -xzC fcgi2 --strip-components 1
+make_build fcgi2
 
 # Ready for gigi itself
 refresh $GITHUB/$ME/gigi
