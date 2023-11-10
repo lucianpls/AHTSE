@@ -61,8 +61,9 @@ devtools_Unbutu() {
     yes | sudo DEBIAN_FRONTEND=noninteractive apt update
     yes | sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y python3 zstd apache2 openssl pip
     sudo service apache2 stop
-    yes | sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y build-essential tcl zlib1g-dev\
-        libcurl4-openssl-dev libpng-dev libjpeg-dev libwebp-dev python3-dev \
+    yes | sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
+        build-essential tcl zlib1g-dev pkg-config libcurl4-openssl-dev\
+        libpng-dev libjpeg-dev libwebp-dev python3-dev\
         libssl-dev apache2-dev libzstd-dev libopenjp2-7-dev
 }
 
