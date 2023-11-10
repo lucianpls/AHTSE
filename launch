@@ -89,7 +89,7 @@ hostid=`aws ec2 run-instances\
 	--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$NAME}]"\
 	--instance-market-options "MarketType=spot"\
 	--key-name handler\
-	--security-group-ids sg-e9ec3297 sg-02f1196e4bd51ad14\
+	--security-group-ids sg-e9ec3297 sg-0509325582d932d26\
     --output text\
     --query Instances[*].InstanceId\
     |tr -d '\r'\

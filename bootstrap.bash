@@ -1,5 +1,6 @@
 # 
 # For Amazon Linux 2, x64 or ARM
+# Also Amazon Linux 2023, Ubuntu
 #
 
 # GIT ID
@@ -7,7 +8,7 @@ export ME=lucianpls
 export THIS_PROJECT=AHTSE
 export GITHUB=https://github.com
 
-sudo yum install -q -y git
+sudo yum install -q -y git || sudo apt-get install -q -y git
 
 refresh() {
     project=$(basename $1)
@@ -24,7 +25,7 @@ refresh() {
 
 }
 
-# Set PREFIX to /usr/local for system install
+# Set PREFIX to /usr/local for system install, otherwise $HOME is used
 export PREFIX=${PREFIX:-$HOME}
 [ -d $HOME/src/ ] || mkdir $HOME/src
 
