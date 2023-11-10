@@ -68,6 +68,17 @@ $SUDO make -s install
 popd
 rm -rf BDIR
 
+# Libgeos, optional, enables geometry calculations in ogr
+refresh $GITHUB/libgeos/geos
+pushd geos
+mkdir build
+pushd build
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -S ..
+make_build
+popd
+rm -rf build
+popd
+
 # My gdal, cmake build
 (command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.6." ) || (
     refresh $GITHUB/$ME/gdal
