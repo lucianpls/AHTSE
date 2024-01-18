@@ -31,7 +31,7 @@ refresh() {
 
 devtools_Amazon() {
     # generic stuff
-    sudo yum install -q -y python3 zstd httpd openssl mod_ssl
+    sudo yum install -q -y python3 swig zstd httpd openssl mod_ssl
     sudo service httpd stop
 
     # Might need to self-certify
