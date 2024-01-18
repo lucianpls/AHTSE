@@ -83,7 +83,6 @@ popd
 (command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.6." ) || (
     refresh $GITHUB/$ME/gdal
     pushd gdal
-    git switch MRFQB3
     mkdir build
     pushd build
     cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib \
