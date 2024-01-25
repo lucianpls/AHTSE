@@ -80,7 +80,7 @@ rm -rf build
 popd
 
 # My gdal, cmake build
-(command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.6." ) || (
+(command -v gdalinfo && gdalinfo --version |grep -q "GDAL 3.9." ) || (
     refresh $GITHUB/$ME/gdal
     pushd gdal
     mkdir build
