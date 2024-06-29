@@ -80,7 +80,7 @@ case $(distro) in
         ;;
 esac
 
-pip3 -q install boto3 pytest numpy filelock
+pip3 -q install boto3 pytest numpy filelock pre-commit
 
 export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
