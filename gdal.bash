@@ -29,7 +29,7 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 (test -f $PREFIX/bin/sqlite3 && $PREFIX/bin/sqlite3 --version | grep -q "3.37") || (
     refresh $GITHUB/sqlite/sqlite version-3.37.2
     pushd sqlite
-    ./configure --prefix=$PREFIX --enable-rtree
+    ./configure --prefix=$PREFIX --enable-rtree --disable-tcl
     make_build
     popd
 )
