@@ -70,7 +70,8 @@ devtools_Ubuntu() {
 }
 
 # main()
-case $(distro) in
+export DISTRO=$(distro)
+case $DISTRO in
     AL2 | Amazon)
         devtools_Amazon
         pip3 -q install boto3 pytest numpy filelock pre-commit
