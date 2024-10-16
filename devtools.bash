@@ -62,15 +62,18 @@ devtools_Ubuntu() {
     yes | sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y python3 zstd apache2 openssl pip
     sudo service apache2 stop
     yes | sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
-        build-essential tcl tcl8.6-dev zlib1g-dev pkg-config libcurl4-openssl-dev\
+        build-essential tcl zlib1g-dev pkg-config libcurl4-openssl-dev\
         libpng-dev libjpeg-dev libwebp-dev python3-dev\
-        libssl-dev apache2-dev libzstd-dev libopenjp2-7-dev
+        libssl-dev apache2-dev libzstd-dev libopenjp2-7-dev pre-commit
+    yes | sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
+        python3-pip python3-pytest python3-numpy python3-filelock
 }
 
 # main()
 case $(distro) in
     AL2 | Amazon)
         devtools_Amazon
+        pip3 -q install boto3 pytest numpy filelock pre-commit
         ;;
     Ubuntu)
         devtools_Ubuntu
@@ -79,8 +82,6 @@ case $(distro) in
         echo "Unknown or unsupported distro $(distro)"
         ;;
 esac
-
-pip3 -q install boto3 pytest numpy filelock pre-commit
 
 export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 

@@ -35,13 +35,15 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 )
 
 # current master of PROJ, needed by gdal
-(command -v proj && proj 2>&1 |grep -q "Rel. 8.0.1" ) || (
-    refresh $GITHUB/OSGeo/PROJ 8.0.1
+(command -v proj && proj 2>&1 |grep -q "Rel. 9.4.0" ) || (
+    refresh $GITHUB/OSGeo/PROJ 9.4.0
     pushd PROJ
-    ./autogen.sh
-    ./configure --prefix=$PREFIX --disable-tiff
+    mkdir out
+    cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -DENABLE_TIFF=OFF -S . -B out
+    pushd out
     make_build
     popd
+    rm -rf out
 )
 
 # My own brunsli
@@ -59,14 +61,14 @@ popd
 
 # My own QB3, build only the library since libicd is not available yet
 refresh $GITHUB/$ME/QB3
-BDIR=QB3/QB3lib/out
+BDIR=QB3/out
 mkdir $BDIR
 pushd $BDIR
 cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -S ..
 make -s -j $NP
 $SUDO make -s install
 popd
-rm -rf BDIR
+rm -rf $BDIR
 
 # Libgeos, optional, enables geometry calculations in ogr
 refresh $GITHUB/libgeos/geos
@@ -96,14 +98,12 @@ popd
 # mrf specific tools, ie 
 refresh $GITHUB/nasa-gibs/mrf
 pushd mrf/mrf_apps
-cp `find $PREFIX/src/gdal -name marfa.h` $PREFIX/include
+$SUDO cp `find $HOME/src/gdal -name marfa.h` $PREFIX/include
 cat >Makefile.lcl <<END_LABEL
 PREFIX=$PREFIX
 GDAL_ROOT=$PREFIX/src/gdal/gdal
 END_LABEL
-make jxl
 make install
-cp jxl $PREFIX/bin
 cp *.py $PREFIX/bin
 popd
 
