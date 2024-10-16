@@ -68,6 +68,7 @@ ahtse_make mod_convert
 ahtse_make mod_ecache
 
 #Deploy, this may prevent rebuilding gdal
+# This will fail on Unbutu since apache is installed as apache2
 sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /lib64
 sudo cp $PREFIX/modules/*.so /etc/httpd/modules
 
