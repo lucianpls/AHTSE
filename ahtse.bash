@@ -27,15 +27,26 @@ ahtse_make() {
 NP=${NP:-$(nproc)}
 pushd $HOME/src
 
-# libicd is not part of AHTSE, build with cmake
+# libicd is not dependent on AHTSE, build with cmake
+# libQB3 dependency means this should be done after libQB3
 refresh $GITHUB/$ME/libicd
 mkdir libicd/build
 pushd libicd/build
-cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib ..
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -DUSE_QB3=On ..
 make -s -j $NP
 $SUDO make -s install
 popd
 rm -rf libicd/build
+
+# Rebuild QB3, with cqb3 enabled
+refresh $GITHUB/$ME/QB3
+mkdir QB3/build
+pushd QB3/build
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -DUSE_CQB3=On ..
+make -s -j $NP
+$SUDO make -s install
+popd
+rm -rf QB3/build
 
 export MAKEOPT=$HOME/src/Make.opt
 
