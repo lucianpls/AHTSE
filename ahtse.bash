@@ -42,7 +42,7 @@ rm -rf libicd/build
 refresh $GITHUB/$ME/QB3
 mkdir QB3/build
 pushd QB3/build
-cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -DUSE_CQB3=On ..
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -DBUILD_CQB3=On ..
 make -s -j $NP
 $SUDO make -s install
 popd
