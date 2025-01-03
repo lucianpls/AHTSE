@@ -79,10 +79,6 @@ ahtse_make mod_convert
 ahtse_make mod_ecache
 
 #Deploy, this may prevent rebuilding gdal
-# This will fail on Unbutu since apache is installed as apache2
-sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /lib64
-sudo cp $PREFIX/modules/*.so /etc/httpd/modules
-
 # Create it here, copy it to the system folder
 cat >ahtse.conf <<END_LABEL
 # AHTSE modules
@@ -122,7 +118,20 @@ LoadModule pngmod_module modules/mod_pngmod.so
 LoadModule convert_module modules/mod_convert.so
 END_LABEL
 
-sudo cp ahtse.conf /etc/httpd/conf.modules.d/
+case $DISTRO in
+    Ubuntu)
+        sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /usr/lib/x86_64-linux-gnu
+        sudo cp $PREFIX/modules/*.so /usr/lib/apache2/modules
+        sudo cp ahtse.conf /etc/apache2/conf-available ; sudo a2enconf ahtse
+        apache2 -t
+        ;;
+    *)
+        sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /lib64
+        sudo cp $PREFIX/modules/*.so /etc/httpd/modules
 
-# Test that everything loads
-httpd -t
+        sudo cp ahtse.conf /etc/httpd/conf.modules.d/
+
+        httpd -t
+        ;;
+esac
+
