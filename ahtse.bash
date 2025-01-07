@@ -118,20 +118,23 @@ LoadModule pngmod_module modules/mod_pngmod.so
 LoadModule convert_module modules/mod_convert.so
 END_LABEL
 
+# Deploy, this just tests the loading of the ahtse modules
 case $DISTRO in
     Ubuntu)
         sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /usr/lib/x86_64-linux-gnu
         sudo cp $PREFIX/modules/*.so /usr/lib/apache2/modules
-        sudo cp ahtse.conf /etc/apache2/conf-available ; sudo a2enconf ahtse
-        apache2 -t
+        sudo cp ahtse.conf /etc/apache2/mods-available/ahtse.load
+# Use sed to insert /usr/lib/apache2/ before modules/
+        sudo sed -i 's|modules/|/usr/lib/apache2/&|' /etc/apache2/mods-available/ahtse.load
+        sudo a2enmod ahtse
+        apachectl configtest && echo "Restart apache to load the AHTSE modules"
         ;;
     *)
         sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /lib64
         sudo cp $PREFIX/modules/*.so /etc/httpd/modules
-
         sudo cp ahtse.conf /etc/httpd/conf.modules.d/
 
-        httpd -t
+        httpd -t && echo "Restart apache to load the AHTSE modules"
         ;;
 esac
 
