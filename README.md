@@ -24,7 +24,7 @@ available at the end of the URL.
 ||**[libicd](https://github.com/lucianpls/libicd)**|Raster format codecs with uniform access API|
 |*Sources*|**[mrf](https://github.com/lucianpls/mod_mrf)**|Serves tiles from an MRF file|
 ||**[ecache](https://github.com/lucianpls/mod_ecache)**|Serves tiles from an esri bundle cache, also cache other tile services|
-||**[fractile](https://github.com/lucianpls/mod_fractile)**|Generates tiles of a fractal as a test source|
+||**[fractile](https://github.com/lucianpls/mod_fractiles)**|Generates tiles of a fractal as a test source|
 |*Transformations*|**[retile](https://github.com/lucianpls/mod_retile)**|Projection, tile grid and scale, format change|
 ||**[convert](https://github.com/lucianpls/mod_convert)**|Data values and type conversions|
 ||**[fillin](https://github.com/lucianpls/mod_fillin)**|Fill in missing tiles by oversampling lower resolution levels. It can be used to fill in sparse datasets, or to add oversampled levels.|
