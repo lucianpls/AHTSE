@@ -121,7 +121,7 @@ END_LABEL
 # Deploy, this just tests the loading of the ahtse modules
 case $DISTRO in
     Ubuntu)
-        sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /usr/lib/x86_64-linux-gnu
+        sudo cp $PREFIX/lib/lib{icd,QB3}.so $PREFIX/lib/libbrunsli*-c.so /usr/lib/x86_64-linux-gnu
         sudo cp $PREFIX/modules/*.so /usr/lib/apache2/modules
         sudo cp ahtse.conf /etc/apache2/mods-available/ahtse.load
 # Use sed to insert /usr/lib/apache2/ before modules/
@@ -130,7 +130,7 @@ case $DISTRO in
         apachectl configtest && echo "Restart apache to load the AHTSE modules"
         ;;
     *)
-        sudo cp $PREFIX/lib/libicd.so $PREFIX/lib/libbrunsli*-c.so /lib64
+        sudo cp $PREFIX/lib/libi{icd,QB3}.so $PREFIX/lib/libbrunsli*-c.so /lib64
         sudo cp $PREFIX/modules/*.so /etc/httpd/modules
         sudo cp ahtse.conf /etc/httpd/conf.modules.d/
 
