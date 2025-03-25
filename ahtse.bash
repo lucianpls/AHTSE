@@ -130,7 +130,7 @@ case $DISTRO in
         apachectl configtest && echo "Restart apache to load the AHTSE modules"
         ;;
     *)
-        sudo cp $PREFIX/lib/libi{icd,QB3}.so $PREFIX/lib/libbrunsli*-c.so /lib64
+        sudo cp $PREFIX/lib/lib{icd,QB3}.so $PREFIX/lib/libbrunsli*-c.so /lib64
         sudo cp $PREFIX/modules/*.so /etc/httpd/modules
         sudo cp ahtse.conf /etc/httpd/conf.modules.d/
 
