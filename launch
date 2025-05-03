@@ -71,7 +71,7 @@ arch=${1:-arm64}
 # The best priced zone changes often
 if [[ $arch == "arm64" ]]
 then
-  itype=c7gd.4xlarge
+  itype=c8gd.4xlarge
 else
   arch=x86_64
   itype=c5ad.2xlarge
@@ -87,7 +87,6 @@ hostid=`aws ec2 run-instances\
 	--instance-type $itype\
 	--placement AvailabilityZone=$AWS_REGION$ZONE\
 	--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$NAME}]"\
-	--instance-market-options "MarketType=spot"\
 	--key-name handler\
 	--security-group-ids sg-e9ec3297 sg-0509325582d932d26\
     --output text\
