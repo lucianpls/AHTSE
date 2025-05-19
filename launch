@@ -1,8 +1,11 @@
 # Starts a spot instance in aws
+# If first parameter is defined, switches to x64 architecture, otherwise arm64
+# If second parameter is "ubuntu", starts an ubuntu instance, otherwise al2023
+# 
 export AWS_REGION=us-west-2
 ZONE=${ZONE:-a}
 export AWS_PROFILE=me
-NAME=AHTSE-DEV
+INAME=AHTSE-DEV
 
 # List the latest Linux AMI in a region
 # aws ssm --profile me --region us-west-2 get-parameters-by-path --path /aws/service/ami-amazon-linux-latest --query Parameters[].Name
@@ -13,7 +16,7 @@ latest() {
     --query Parameter.Value |tr -d '\r'
 }
 
-# Takes one argument, the short name of the architecture
+# Takes one argument, the short name of the architecture. Deprecated
 latest_al2() {
     latest amzn2-ami-hvm-${1}-gp2
 }
@@ -23,6 +26,19 @@ latest_al2023() {
     latest al2023-ami-kernel-default-${1}
 #    latest al2023-ami-minimal-kernel-default-${1}
 }
+
+# Get the latest ubuntu 24.0 stable ami value
+latest_ubuntu_24() {
+    if [ "${1}" == "arm64" ]
+    then
+      arch=arm64
+    else
+      arch=amd64
+    fi
+    aws ssm get-parameters-by-path --path /aws/service/canonical/ubuntu/server/24.04/stable/current/${arch} \
+    --recursive --query Parameters[0].Value |tr -d '"'
+}
+
 
 #Get ids for running instances with a given name
 get_instid() {
@@ -77,16 +93,22 @@ else
   itype=c5ad.2xlarge
 fi
 
-AMI=$(latest_al2023 $arch)
-
-# echo $(lspec)
-# aws ec2 request-spot-instances --launch-specification "$(lspec)" 
+# Second parameter can be "ubuntu", defaults to al2023
+distro=${2:-al2023}
+if [[ $distro == "ubuntu" ]]
+then
+  username=ubuntu
+  AMI=$(latest_ubuntu_24 $arch)
+else
+  username=ec2-user
+  AMI=$(latest_al2023 $arch)
+fi
 
 hostid=`aws ec2 run-instances\
 	--image-id $AMI\
 	--instance-type $itype\
 	--placement AvailabilityZone=$AWS_REGION$ZONE\
-	--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$NAME}]"\
+	--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$INAME}]"\
 	--key-name handler\
 	--security-group-ids sg-e9ec3297 sg-0509325582d932d26\
     --output text\
@@ -111,5 +133,5 @@ hostip=$(get_inst_ip $hostid)
 echo Host IP is $hostip
 # Might need to wait a bit for ssh to be ready
 sleep 10
-scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no bootstrap.bash $hostip:
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $hostip bash -x ./bootstrap.bash
+scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no bootstrap.bash $username@$hostip:
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $username@$hostip bash -x ./bootstrap.bash
