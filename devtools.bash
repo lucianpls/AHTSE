@@ -63,7 +63,7 @@ devtools_Ubuntu() {
     sudo service apache2 stop
     yes | sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
         build-essential tcl zlib1g-dev pkg-config libcurl4-openssl-dev\
-        libpng-dev libjpeg-dev libwebp-dev python3-dev\
+        libpng-dev libjpeg-dev libwebp-dev python3-dev swig\
         libssl-dev apache2-dev libzstd-dev libopenjp2-7-dev pre-commit
     yes | sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
         python3-pip python3-pytest python3-numpy python3-filelock
