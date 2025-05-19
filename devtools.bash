@@ -66,7 +66,8 @@ devtools_Ubuntu() {
         libpng-dev libjpeg-dev libwebp-dev python3-dev swig\
         libssl-dev apache2-dev libzstd-dev libopenjp2-7-dev pre-commit
     yes | sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y \
-        python3-pip python3-pytest python3-numpy python3-filelock
+        python3-pip python3-pytest python3-numpy python3-filelock \
+        python3-pytest-env python3-lxml
 }
 
 # main()
