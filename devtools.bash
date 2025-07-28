@@ -89,9 +89,9 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
 [ -d $HOME/src/ ] || mkdir $HOME/src
 pushd $HOME/src
-# Prevent building cmake multiple times. Current version is 3.20
-(command -v cmake > /dev/null && cmake --version | grep -q "version 3.2") || (
-    refresh $GITHUB/Kitware/CMake v3.28.1
+# Prevent building cmake multiple times. Current version is 4.0.3
+(command -v cmake > /dev/null && cmake --version | grep -q "version 4.") || (
+    refresh $GITHUB/Kitware/CMake v4.0.3
     pushd CMake
     NP=${NP:-$(nproc)}
     ./bootstrap --prefix=$PREFIX --parallel=$NP
