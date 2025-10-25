@@ -51,7 +51,10 @@ refresh $GITHUB/$ME/brunsli
 pushd brunsli
 git submodule update --init --recursive
 mkdir out
-cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -S . -B out
+# This is getting to be a problem because brunsli is not maintained. brunsli depends on old brotli, which depend on old make
+# Updating brotli drops the static build, it would have to be disabled in brunsli to make it work
+# Newer cmake will disable 3.5 compatibility
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -S . -B out
 pushd out
 make -s -j $NP
 $SUDO make -s install
