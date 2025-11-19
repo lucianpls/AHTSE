@@ -22,17 +22,17 @@ available at the end of the URL.
 |*Common*|**[AHTSE](../..)**|Top level AHTSE project, contains useful scripts to build AHTSE|
 ||**[libahtse](https://github.com/lucianpls/libahtse)**|common code, shared by AHTSE modules|
 ||**[libicd](https://github.com/lucianpls/libicd)**|Raster format codecs with uniform access API|
-|*Sources*|**[mrf](https://github.com/lucianpls/mod_mrf)**|Serves tiles from an MRF file|
+|*Source*|**[mrf](https://github.com/lucianpls/mod_mrf)**|Serves tiles from an MRF file|
 ||**[ecache](https://github.com/lucianpls/mod_ecache)**|Serves tiles from an esri bundle cache, also cache other tile services|
 ||**[fractile](https://github.com/lucianpls/mod_fractiles)**|Generates tiles of a fractal as a test source|
-|*Transformations*|**[retile](https://github.com/lucianpls/mod_retile)**|Projection, tile grid and scale, format change|
+|*Transform*|**[retile](https://github.com/lucianpls/mod_retile)**|Projection, tile grid and scale, format change|
 ||**[convert](https://github.com/lucianpls/mod_convert)**|Data values and type conversions|
 ||**[fillin](https://github.com/lucianpls/mod_fillin)**|Fill in missing tiles by oversampling lower resolution levels. It can be used to fill in sparse datasets, or to add oversampled levels.|
 ||**[pngmod](https://github.com/lucianpls/mod_pngmod)**|PNG manipulation module, without a full transcode|
+||**[tartiles](https://github.com/lucianpls/mod_tartiles)**|Adds a multiple tile request, packed in a streaming tar file|
 |*Protocol*|**[twms](https://github.com/lucianpls/mod_twms)**|Converts requests from tWMS protocol to AHTSE style|
 |*Utilities*|**[receive](https://github.com/lucianpls/mod_receive)**|Subrequest filter that enables passing tile data between AHTSE components|
 ||**[sendifmatch](https://github.com/lucianpls/mod_sfim)**|Used for protocol handshake files, it responds with the content from a static file to requests matching specific patterns|
-||**[tartiles](https://github.com/lucianpls/mod_tartiles)**|Adds a multiple tile request, packed in a streaming tar file|
 ||**[brunsli](https://github.com/lucianpls/mod_brunsli)**|Filter to convert between JPEG JFIF and brunsli on the fly|
 ||**[lua](https://github.com/lucianpls/mod_ahtse_lua)**|Allows AHTSE modules to be extended with Lua scripts|
 
