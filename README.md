@@ -29,7 +29,7 @@ available at the end of the URL.
 ||**[convert](https://github.com/lucianpls/mod_convert)**|Data values and type conversions|
 ||**[fillin](https://github.com/lucianpls/mod_fillin)**|Fill in missing tiles by oversampling lower resolution levels. It can be used to fill in sparse datasets, or to add oversampled levels.|
 ||**[pngmod](https://github.com/lucianpls/mod_pngmod)**|PNG manipulation module, without a full transcode|
-||**[tartiles](https://github.com/lucianpls/mod_tartiles)**|Adds a multiple tile request, packed in a streaming tar file|
+||**[tartiles](https://github.com/lucianpls/mod_tartiles)**|Request multiple tiles at once, packed in a streaming tar file|
 |*Protocol*|**[twms](https://github.com/lucianpls/mod_twms)**|Converts requests from tWMS protocol to AHTSE style|
 |*Utilities*|**[receive](https://github.com/lucianpls/mod_receive)**|Subrequest filter that enables passing tile data between AHTSE components|
 ||**[sendifmatch](https://github.com/lucianpls/mod_sfim)**|Used for protocol handshake files, it responds with the content from a static file to requests matching specific patterns|
