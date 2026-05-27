@@ -52,9 +52,10 @@ devtools_Amazon() {
         libpng-devel libjpeg-devel libwebp-devel python3-devel openssl-devel\
         httpd-devel libzstd-devel openjpeg2-devel
 
+    alias python3=python3.14
     # Install python dependencies
     python3.14 -m pip install --upgrade pip
-    python3.14 -m pip install -q boto3 pytest numpy filelock pre-commit
+    python3.14 -m pip install -q setuptools boto3 pytest numpy filelock pre-commit
 }
 
 devtools_Ubuntu() {
