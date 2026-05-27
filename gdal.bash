@@ -114,7 +114,13 @@ popd
 popd
 
 # Set up environment for using gdal
-export PYTHONPATH=$(echo $PREFIX/lib64/python3.*/site-packages)
+# If python 3.14 is installed, use it
+if [ -e /usr/bin/python3.14 ]
+then
+    export PYTHONPATH=$(echo $PREFIX/lib64/python3.14/site-packages)
+else
+    export PYTHONPATH=$(echo $PREFIX/lib64/python3.*/site-packages)
+fi
 export LD_LIBRARY_PATH=$PREFIX/lib
 grep -q PYTHONPATH $HOME/.bashrc
 if [ ! -z $? ]
