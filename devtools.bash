@@ -31,7 +31,7 @@ refresh() {
 
 devtools_Amazon() {
     # generic stuff
-    sudo yum install -q -y python3 swig zstd httpd openssl mod_ssl
+    sudo yum install -q -y python3.14 python3.14-devel pyton3.14-pip swig zstd httpd openssl mod_ssl
     sudo service httpd stop
 
     # Might need to self-certify
@@ -55,8 +55,6 @@ devtools_Amazon() {
         libpng-devel libjpeg-devel libwebp-devel python3-devel openssl-devel\
         httpd-devel libzstd-devel openjpeg2-devel
 
-    # Amazon linux2023 python is too old, install python3.14
-    sudo yum install -q -y python3.14 python3.14-devel pyton3.14-pip
     # Install python dependencies
     python3.14 -m pip upgrade pip
     python3.14 -m pip install -q boto3 pytest numpy filelock pre-commit
