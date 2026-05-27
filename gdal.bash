@@ -27,7 +27,7 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 # current master of sqlite3, needed by PROJ
 # sqlite3 is already installed, so make sure this is our installation
 (test -f $PREFIX/bin/sqlite3 && $PREFIX/bin/sqlite3 --version | grep -q "3.37") || (
-    refresh $GITHUB/sqlite/sqlite version-3.37.2
+    refresh $GITHUB/sqlite/sqlite version-3.52.0
     pushd sqlite
     ./configure --prefix=$PREFIX --enable-rtree --disable-tcl
     make_build

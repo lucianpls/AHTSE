@@ -53,7 +53,7 @@ devtools_Amazon() {
         httpd-devel libzstd-devel openjpeg2-devel
 
     # Install python dependencies
-    python3.14 -m pip upgrade pip
+    python3.14 -m pip install --upgrade pip
     python3.14 -m pip install -q boto3 pytest numpy filelock pre-commit
 }
 
