@@ -31,7 +31,7 @@ refresh() {
 
 devtools_Amazon() {
     # generic stuff
-    sudo yum install -q -y python3.14 python3.14-devel pyton3.14-pip swig zstd httpd openssl mod_ssl
+    sudo yum install -q -y python3.14 python3.14-devel python3.14-pip swig zstd httpd openssl mod_ssl
     sudo service httpd stop
 
     # Might need to self-certify
@@ -43,9 +43,6 @@ devtools_Amazon() {
             -out /etc/pki/tls/certs/localhost.crt \
             -subj "/C=US/ST=Oregon/L=Los Angeles/O=AHTSE/OU=Org/CN=www.ahtse.com"
     fi
-
-    # One of these might fail
-    sudo yum install -q -y pip || sudo yum install -q -y pip3
 
     # development tools
     sudo yum install -q -y gcc gcc-c++ automake libtool

@@ -5,6 +5,7 @@
 export AWS_REGION=us-west-2
 ZONE=${ZONE:-a}
 export AWS_PROFILE=me
+export KEY_NAME=handler
 INAME=AHTSE-DEV
 
 # List the latest Linux AMI in a region
@@ -109,7 +110,7 @@ hostid=`aws ec2 run-instances\
 	--instance-type $itype\
 	--placement AvailabilityZone=$AWS_REGION$ZONE\
 	--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$INAME}]"\
-	--key-name handler\
+	--key-name $KEY_NAME\
 	--security-group-ids sg-e9ec3297 sg-0509325582d932d26\
     --output text\
     --query Instances[*].InstanceId\
