@@ -75,7 +75,12 @@ devtools_Ubuntu() {
 # main()
 export DISTRO=$(distro)
 case $DISTRO in
-    AL2 | Amazon)
+    AL2)
+	echo "Amazon Linux 2 is no longer supported"
+	exit 128
+        ;;
+    Amazon)
+	 
         devtools_Amazon
         ;;
     Ubuntu)

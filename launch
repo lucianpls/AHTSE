@@ -17,11 +17,6 @@ latest() {
     --query Parameter.Value |tr -d '\r'
 }
 
-# Takes one argument, the short name of the architecture. Deprecated
-latest_al2() {
-    latest amzn2-ami-hvm-${1}-gp2
-}
-
 # Same as above, but for AL2023
 latest_al2023() {
     latest al2023-ami-kernel-default-${1}
