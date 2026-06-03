@@ -58,7 +58,7 @@ get_inst_state() {
 # Two params, instance id and state as string
 wait_for_instance_state() {
     echo -n Waiting for instance $1 to be $2 >&2
-    while [ $2 != `get_inst_state $1` ]
+    while [ "$2" != `get_inst_state $1` ]
     do
         echo -n . >&2
         sleep 1
