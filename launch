@@ -83,7 +83,7 @@ arch=${1:-arm64}
 # The best priced zone changes often
 if [[ $arch == "arm64" ]]
 then
-  itype=${itype:-c8gd.4xlarge}
+  itype=${itype:-c9gd.4xlarge}
 else
   arch=x86_64
   itype=${itype:-c5ad.2xlarge}
@@ -128,6 +128,6 @@ hostip=$(get_inst_ip $hostid)
 
 echo Host IP is $hostip
 # Might need to wait a bit for ssh to be ready
-sleep 10
+sleep 15
 scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no bootstrap.bash $username@$hostip:
 ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $username@$hostip bash -x ./bootstrap.bash
