@@ -106,7 +106,8 @@ cat >Makefile.lcl <<END_LABEL
 PREFIX=$PREFIX
 GDAL_ROOT=$PREFIX/src/gdal/gdal
 END_LABEL
-make install
+# The mrf Makefile now includes ../Makefile.lcl, pass the values explicitly so they always apply
+make install PREFIX=$PREFIX GDAL_ROOT=$PREFIX/src/gdal/gdal
 cp *.py $PREFIX/bin
 popd
 

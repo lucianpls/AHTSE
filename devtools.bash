@@ -1,6 +1,15 @@
 
 # Linux distro
 distro() {
+    # RHEL 9 kernels are tagged .el9_N, which doesn't identify the distro reliably
+    # (nor does uname inside a container), so check os-release first
+    if [ -r /etc/os-release ]
+    then
+        case $(. /etc/os-release; echo "$ID:$VERSION_ID") in
+        rhel:9*)
+            echo "RHEL"; return;;
+        esac
+    fi
     case $(uname -a) in
     *\.amzn2\.*)
         echo "AL2";;
@@ -58,6 +67,44 @@ devtools_Amazon() {
     python3.14 -m pip install -q setuptools boto3 pytest numpy filelock pre-commit
 }
 
+devtools_RHEL() {
+    # openjpeg2-devel lives in CodeReady Builder, which is not enabled by default
+    # The UBI images have it as ubi-9-codeready-builder-rpms, already enabled
+    sudo dnf install -q -y dnf-plugins-core
+    sudo subscription-manager repos --enable codeready-builder-for-rhel-9-$(uname -m)-rpms >/dev/null 2>&1 ||\
+        sudo dnf config-manager --set-enabled codeready-builder-for-rhel-9-$(uname -m)-rpms >/dev/null 2>&1 ||\
+        true
+
+    # generic stuff
+    sudo dnf install -q -y python3.14 python3.14-devel python3.14-pip zstd httpd openssl mod_ssl
+    # swig is in AppStream on a subscribed RHEL, but not in the UBI repos. Only needed for gdal python bindings
+    sudo dnf install -q -y swig || echo "WARNING: swig not available, gdal python bindings will not be built"
+    sudo systemctl stop httpd 2>/dev/null || true
+
+    # Might need to self-certify
+    if [ ! -e /etc/pki/tls/certs/localhost.crt ]
+    then
+        sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+            -keyout /etc/pki/tls/private/localhost.key \
+            -out /etc/pki/tls/certs/localhost.crt \
+            -subj "/C=US/ST=Oregon/L=Los Angeles/O=AHTSE/OU=Org/CN=www.ahtse.com"
+    fi
+
+    # development tools
+    # redhat-rpm-config provides the gcc spec files that apxs passes to the compiler
+    sudo dnf install -q -y gcc gcc-c++ make automake libtool patch pkgconf-pkg-config redhat-rpm-config
+
+    # various depenencies
+    sudo dnf install -q -y tcl zlib-devel libcurl-devel\
+        libpng-devel libjpeg-turbo-devel libwebp-devel python3-devel openssl-devel\
+        httpd-devel libzstd-devel openjpeg2-devel
+
+    alias python3=python3.14
+    # Install python dependencies
+    python3.14 -m pip install -q --user --upgrade pip
+    python3.14 -m pip install -q --user setuptools boto3 pytest numpy filelock pre-commit
+}
+
 devtools_Ubuntu() {
     export DEBIAN_FRONTEND=noninteractive
     yes | sudo DEBIAN_FRONTEND=noninteractive apt update
@@ -82,6 +129,9 @@ case $DISTRO in
     Amazon)
 	 
         devtools_Amazon
+        ;;
+    RHEL)
+        devtools_RHEL
         ;;
     Ubuntu)
         devtools_Ubuntu

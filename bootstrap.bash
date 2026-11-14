@@ -1,6 +1,6 @@
 # 
 # For Amazon Linux 2, x64 or ARM
-# Also Amazon Linux 2023, Ubuntu
+# Also Amazon Linux 2023, Ubuntu, RHEL 9
 #
 
 # GIT ID
